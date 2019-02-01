@@ -1,0 +1,286 @@
+/* General color scheme */
+body{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .85rem;
+}
+.top-bar-box{
+    z-index: 100;
+}
+nav.theme-secondary-bg a.nav-link{
+    
+}
+.theme-gradient-bg{
+
+}
+.theme-gradient-alt-bg{
+
+}
+.theme-bg{
+    background-color: #000066;
+}
+.theme-btn,
+.theme-btn-alt:hover{
+
+}
+
+.theme-btn-alt,
+.theme-btn:hover
+{
+
+}
+.white-bg{
+    background-color: #fff;
+
+}
+
+.theme-color{
+
+}
+.theme-secondary-color{
+
+}
+.white{
+    color: #fff;
+}
+.grey{
+    color: grey;
+}
+a{
+
+}
+
+a:hover{
+
+}
+a.navbar-brand{
+
+}
+a.navbar-brand:hover{
+
+}
+a,
+.theme-btn,
+.theme-btn-alt{
+    transition: all .4s ease-in-out;
+}
+.has-error{
+    color: #ff0000;
+}
+
+
+a[role='tab']{
+    background-color: #343a40;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+a[role='tab']:hover{
+    color: #fff;
+}
+
+.striped-list:nth-child(odd){
+    background-color: #f7f7f7;
+}
+.striped-list:nth-child(even){
+    background-color: #fff;
+}
+
+/* Some handy styles */
+.has-operations .operations-container{
+    display: none;
+}
+.has-operations:hover .operations-container{
+    display: block;
+}
+
+.confirmation-container{
+	display: none;
+	position:absolute;
+	z-index: 100;
+	width: 300px;
+	background-color: grey;
+	padding: 8px; 
+	box-shadow: 0px 0px 10px rgba(0,0,0,.3);
+	border-radius: 5px;
+	
+}
+.description-container{
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 5px;
+    color: grey;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.content-box{
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0px 3px 3px rgba(0,0,0,.125);
+    margin: 8px 0;
+}
+
+/* Widgets */
+.tt-dataset{
+    box-shadow: 0px 10px 10px rgba(0,0,0,.3);
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.list-group.ball-bullet,
+.list-group.icon-bullet,
+.list-group.image-bullet
+{
+    border-left: 1px solid rgba(0,0,0,.125);
+    margin-left: 20px;
+    padding-left: 5px;
+}
+.widget .list-group-item{
+    padding: 0 !important;
+}
+.list-group.ball-bullet .list-group-item,
+.list-group.icon-bullet .list-group-item,
+.list-group.image-bullet .list-group-item
+{
+    border: 0;
+    border-radius: 0;
+}
+
+
+.list-group.ball-bullet .bullet{
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0,0,0,.225);
+    border-radius: 50%;
+}
+.list-group.ball-bullet .list-group-item:hover .bullet{
+    background-color: #000;
+}
+
+.list-group.icon-bullet .icon{
+    font-size: 20px;
+    color: rgba(0,0,0,.225);
+}
+.list-group.icon-bullet .list-group-item:hover .icon{
+    color: #000;
+}
+
+
+.list-group.ball-bullet .d-flex,
+.list-group.icon-bullet .d-flex
+{
+    margin-left: -18px;
+}
+.list-group.image-bullet .d-flex{
+    margin-left: -30px;
+}
+
+.list-group.ball-bullet .list-group-item .bullet,
+.list-group.icon-bullet .list-group-item .bullet,
+.list-group.image-bullet .list-group-item img{
+    margin-right: 10px;
+    margin-top: 5px;
+    box-shadow: 0px 10px 40px rgba(0,0,0,.3);
+
+}
+
+.tag
+{
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+    margin: 5px;
+}
+.tag .closer{
+    cursor: pointer;
+    margin-left: 10px;
+}
+.post .closer:hover{
+    color: red;
+}
+
+
+
+/* Avatars */
+.avatar{
+    border-radius: 50%;
+}
+.dp{
+
+}
+.dp-lg,
+.avatar-lg{
+    width: 100px;
+    height: 100px;
+}
+.dp-md,
+.avatar-md{
+    width: 70px;
+    height: 70px;
+}
+.dp-sm,
+.avatar-sm{
+    width: 50px;
+    height: 50px;
+}
+.dp-xs,
+.avatar-xs{
+    width: 30px;
+    height: 30px;
+}
+
+.feed{
+
+}
+.snippet{
+    background-color: rgba(0,0,0,.025);
+    margin:5px 0;
+    padding: 5px;
+}
+.comment-replies{
+    max-height: 300px;
+    overflow-y: hidden;
+}
+.comment-replies:hover{
+    overflow-y: auto;
+}
+.business-logo{
+    width: 50px;
+    height: 50px;
+}
+
+/* Businesses */
+.owl-carousel .owl-stage{
+}
+.owl-carousel .owl-item{
+    text-align: center !important;
+}
+.owl-carousel .content-box{
+    border: 1px solid #f7f7f7
+}
+.owl-carousel .item img.carousel-image{
+    width: 100px !important;
+    height: 100px !important;
+    display: inline !important;
+}
+
+
+
+/**************************************************************************************/
+
+/* xs screens or lesser */
+@media(max-width: 576px){
+
+}
+/* sm screen and above*/
+@media (min-width: 576px){
+
+}
+/* md screen and above */
+@media (min-width: 768px){
+
+    
+}
