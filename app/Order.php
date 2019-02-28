@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['customer_id', 'user_id','quantity','ammount','completed_at'];
+    protected $fillable = ['customer_id', 'user_id','type','quantity','ammount','completed_at'];
 
     public function id(){
         return '#'.$this->id;
@@ -62,7 +62,7 @@ class Order extends Model
     }
 
     public function status(){
-        return $this->closed() ? '<span class="text-success">closed on <strong>'.$this->closed_at().'</strong> by <strong><a href="'.route('user.show',[$this->closed_by()->id]).'">'.$this->closed_by()->fullname().'</a></strong></span>' : '<span class="text-danger">Open</span>';
+        return $this->closed() ? '<span class="text-danger"><i class="fa fa-lock"></i> closed on <strong>'.$this->closed_at().'</strong> by <strong><a href="'.route('user.show',[$this->closed_by()->id]).'">'.$this->closed_by()->fullname().'</a></strong></span>' : '<span class="text-success"><i class="fa fa-lock-open"></i> Open</span>';
     }
 
     public function isSuppliable(){

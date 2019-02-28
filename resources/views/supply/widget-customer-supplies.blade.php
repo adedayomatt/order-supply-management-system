@@ -1,4 +1,4 @@
-    <table class="table table-striped table-hovered">
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Order</th>
@@ -23,7 +23,7 @@
                     <td>{{$supply->bank}}</td>
                     <td>{!!$supply->transaction_id === null ? '<small class="text-danger">No transaction ID</small>' : $supply->transaction_id!!}</td>
                     <td>
-                        <small class="grey">Recorded by <a href="{{route('user.show',[$supply->user->id])}}">{{$supply->user->fullname()}}</a> on {{$supply->created_at()}}, {{$supply->created_at->diffForHumans()}} </small>
+                        <small class="grey"><i class="fa fa-pen"></i> Recorded by <a href="{{route('user.show',[$supply->user->id])}}">{{$supply->user->fullname()}}</a> on {{$supply->created_at()}}, {{$supply->created_at->diffForHumans()}} </small>
                         <hr>
                         @if($supply->note === null)
                         <div class="text-center">
@@ -31,21 +31,20 @@
                         </div>
                         @else
                             <div>
-                               
                                 {!!$supply->note!!}
                             </div>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('order.show',[$supply->order->id])}}" class="small">view order</a>
+                        <a href="{{route('order.show',[$supply->order->id])}}" class="btn btn-sm btn-primary m-1"><i class="fa fa-eye"></i> view order</a>
                         @if($supply->reverted())
                         <div>
-                            <small class="text-danger">Reverted on {{$supply->reverted_at()}} by <strong><a href="{{route('user.show',[$supply->reverted_by()->id])}}">{{$supply->reverted_by()->fullname()}}</a></strong></small>
+                            <small class="text-warning"><i class="fa fa-undo"></i> Reverted on {{$supply->reverted_at()}} by <strong><a href="{{route('user.show',[$supply->reverted_by()->id])}}">{{$supply->reverted_by()->fullname()}}</a></strong></small>
                         </div>
                         @else
                             <form action="{{route('supply.revert',[$supply->id])}}" method="POST">
                                 @csrf
-                                <input type="submit" class="btn btn-link small text-warning" value="revert">
+                                <button type="submit" class="btn btn-warning btn-sm m-1"><i class="fa fa-undo"></i> Revert</button>
                             </form>
                         @endif
                         
@@ -53,9 +52,9 @@
                 </tr>
             @endforeach
             @else
-                <tr class="grey text-center">
+                <tr class="text-danger text-center">
                     <td colspan="8">
-                        {{$customer->fullname()}} does not have any supply record
+                        <i class="fa fa-exclamation-triangle"></i> {{$customer->fullname()}} does not have any supply record
                     </td>
                 </tr>
             @endif

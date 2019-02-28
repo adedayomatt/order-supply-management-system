@@ -6,19 +6,19 @@
 <div class="content-box">
     <div class="row align-items-center">
       <div class="col-md-8">
-        <h5 class="grey">Staff</h5>
+        <h5 class="grey"><i class="fa fa-user-tie"></i> Staff</h5>
         <h4>{{$user->fullname()}}</h4>
         <h5 class="grey">{{$user->position()}}</h5>
-        @if(auth()->user()->position === 4)
-            <a href="{{route('user.edit',[$user->id])}}">edit</a>
+        @if(auth()->user()->isManager())
+            <a href="{{route('user.edit',[$user->id])}}"> <i class="fa fa-pen"></i> Edit</a>
         @endif
 
       </div>
       <div class="col-md-4">
           <div class="text-center">
           <h5>Contacts</h5>
-            <strong class="m-5"><a href="mailto: {{$user->email}}">{{$user->email}}</a></strong>
-            <strong class="m-5"><a href="tel: {{$user->phone}}">{{$user->phone}}</a></strong>
+             <strong class="m-2"><a href="mailto: {{$user->email}}"><i class="fa fa-envelope"></i> {{$user->email}}</a></strong>
+             <strong class="m-2"><a href="tel: {{$user->phone}}"><i class="fa fa-phone"></i> {{$user->phone}}</a></strong>
           </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
 
     <div class="col-md-6">
       <div class="content-box">
-      <h5>Supplies recoded by {{$user->firstname}}- {{$user->supplies()->count()}}</h5>
+      <h5>Supplies/Payments recorded by {{$user->firstname}}- {{$user->supplies()->count()}}</h5>
       <a href="{{route('user.supplies',[$user->id])}}">view supplies</a>
       <div class="scrollable">
         <?php $supplies = $user->supplies ?>

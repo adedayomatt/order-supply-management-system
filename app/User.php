@@ -63,6 +63,19 @@ class User extends Authenticatable
             break;
         }
     }
+    public function isMD(){
+        return $this->position == 4 ? true : false;
+    }
+    public function isManager(){
+        return $this->position == 3 ? true : false;
+    }
+    public function isMarketer(){
+        return $this->position == 2 ? true : false;
+    }
+    public function isCC(){
+        return $this->position == 1 ? true : false;
+    }
+
     public function avatar(){
 		$image = array();
 		$image['src'] = $this->avatar === null ? asset('storage/images/users/default.png') : asset('storage/images/users/'.$this->avatar);

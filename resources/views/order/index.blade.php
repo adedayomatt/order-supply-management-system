@@ -7,12 +7,13 @@
 
     <div class="content-box">
     @if($orders->count() > 0)
-            <table class="table table-striped text-center">
+            <table class="table table-striped table-bordered text-center">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Customer</th>
                     <th>Quantity</th>
+                    <th>Type</th>
                     <th>Ammount</th>
                     <th>status</th>
                     <th></th>
@@ -31,6 +32,7 @@
                             </div>
                         </td>
                         <td>{{number_format($order->quantity)}}</td>
+                        <td ><span class="type">{{$order->type}}</span></td>
                         <td>&#8358; {{number_format($order->ammount)}}</td>
                         <td>
                             {!!$order->status()!!}
@@ -47,9 +49,9 @@
                             </p>
                         </td>
                         <td>
-                            <a href="{{route('order.show',[$order->id])}}">View Order</a>
+                            <a href="{{route('order.show',[$order->id])}}" class="btn btn-primary btn-sm m-1"><i class="fa fa-eye"></i> View Order</a>
                             @if(!$order->closed())
-                                <a href="{{route('supply.create',[$order->id])}}" class=" ">supply</a>
+                                <a href="{{route('supply.create',[$order->id])}}" class="btn btn-info btn-sm m-1"><i class="fa fa-plus"></i> New supply/payment</a>
                             @endif                          
                         </td>
                     </tr>
@@ -60,7 +62,7 @@
     @else
         <div class="grey text-center">
            No order found
-            <a href="{{route('order.create')}}" class="btn btn-primary">Create one now</a>
+            <a href="{{route('order.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Create one now</a>
         </div>
     @endif
     </div>

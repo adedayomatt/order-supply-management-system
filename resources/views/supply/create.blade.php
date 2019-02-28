@@ -21,7 +21,12 @@
         <div class="content-box">
 
             @if($order->closed())
-                <div class="grey text-center">
+                <div class="text-center">
+                    <h1 class="text-danger">
+                        <i class="fa fa-lock"></i> 
+                        <br>
+                        Order closed
+                     </h1>
                     <h5>Oops Sorry <strong>{{auth()->user()->firstname}}</strong>, 
                         You can't add supply to this order 
                         <a href="{{route('order.show',[$order->id])}}">{{$order->id()}}</a> for 

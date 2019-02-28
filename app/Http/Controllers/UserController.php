@@ -12,8 +12,12 @@ class UserController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth');
-        $this->middleware('md')->except(['index','show']);
+        $this->middleware('manager')->except([
+            'index',
+            'show',
+            'changePassword',
+            'updatePassword'
+        ]);
     }
     /**
      * Display a listing of the resource.
@@ -22,6 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $users = User::where('id' != 1)->orderby('created_at','desc')->get();
         return view('user.index')->with('users',User::all());
     }
 
@@ -165,8 +170,9 @@ class UserController extends Controller
             'old_password' => 'required',
             'password' => 'required|string|min:6|confirmed'
         ]);
-        if(Hash::make($request->old_password) === $user->password){
+        if(Hash::check($request->old_password, $user->password)){
             $user->password = Hash::make($request->password);
+            $user->save();
             return redirect()->route('user.show',[$user->id])->with('success','Password changed');
         }
         else{

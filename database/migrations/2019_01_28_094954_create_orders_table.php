@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->integer('customer_id');
             $table->integer('quantity');
+            $table->string('type');
             $table->integer('ammount');
             $table->longText('note')->nullable();
             $table->timestamp('closed_at')->nullable();

@@ -8,7 +8,7 @@
 
   <form action="{{route('customer.index')}}" class="form-inline">
     <div class="form-group">
-        <select name="customer" id="" class="form-control" style="min-width: 250px;">
+        <select name="customer" id="" class="form-control" style="min-width: 250px; border-radius: 3px 0px 0px 3px">
                 <?php $customers = $_customers::orderby('created_at','desc')->get()?>
                 @foreach($customers as $customer)
                     <option value="{{$customer->id}}">{{$customer->fullname()}}</option>
@@ -16,7 +16,7 @@
         </select>
     </div>
     <div class="form-group">
-        <input type="submit" class="btn btn-primary btn-sm" value="view customer">
+        <button type="submit" class="btn btn-primary btn-sm" style="border-radius: 0px 3px 3px 0px"><i class="fa fa-eye"></i> view customer</button>
     </div>
   </form>
 
@@ -24,18 +24,18 @@
     <ul class="navbar-nav mr-auto ml-auto">
         <li class="nav-item ">
             <a href="{{route('customer.index')}}" class="nav-link">
-                Customers
+               <i class="fa fa-users"></i> Customers
             </a>
         </li>
         <li class="nav-item ">
             <a href="{{route('order.index')}}" class="nav-link">
-                All Orders
+               <i class="fa fa-question-circle"></i> All Orders
             </a>
         </li>
 
         <li class="nav-item dropdown">
             <a href="{{route('order.index')}}" class="nav-link dropdown-toggle" id="orders-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Monthly Orders
+                <i class="fa fa-calendar"></i> Monthly Orders
             </a>
             <div class="dropdown-menu" id="nav-orders" aria-labelledby="orders-dropdown">
                       <div class="dropdown-item">
@@ -56,13 +56,13 @@
 
         <li class="nav-item ">
             <a href="{{route('supplies')}}" class="nav-link">
-                All supplies
+                <i class="fa fa-upload"></i> All supplies
             </a>
         </li>
 
         <li class="nav-item dropdown">
             <a href="{{route('supplies')}}" class="nav-link dropdown-toggle" id="supplies-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Monthly supplies
+            <i class="fa fa-calendar"></i> Monthly supplies
             </a>
             <div class="dropdown-menu" id="nav-supplies" aria-labelledby="supplies-dropdown">
                       <div class="dropdown-item">
@@ -83,15 +83,15 @@
 
       <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="create-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Create
+            <i class="fa fa-plus"></i> Create
             </a>
                 <div class="dropdown-menu" aria-labelledby="create-dropdown">
-                <a class="dropdown-item" href="{{route('customer.create')}}">New Customer</a>
+                <a class="dropdown-item" href="{{route('customer.create')}}"><i class="fa fa-user"></i> New Customer</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{route('order.create')}}">New Order</a>
+                <a class="dropdown-item" href="{{route('order.create')}}"><i class="fa fa-question-circle"></i> New Order</a>
                 <div class="dropdown-divider"></div>
                 @if(auth()->user()->position === 4)
-                    <a class="dropdown-item" href="{{route('user.create')}}">New User</a>
+                    <a class="dropdown-item" href="{{route('user.create')}}"><i class="fa fa-user-tie"></i> New User</a>
                 @endif
             </div>
       </li>
@@ -103,17 +103,17 @@
                 
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ auth()->user()->firstname }} <span class="caret"></span>
+                        <i class="fa fa-user"></i> {{ auth()->user()->firstname }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="{{route('user.index')}}" class="dropdown-item">All users</a>
-                           <a href="{{route('user.show',[auth()->user()->id])}}" class="dropdown-item">My Transactions</a>
-                            <a href="{{route('password.change',[auth()->user()->id])}}" class="dropdown-item">Change password</a>
+                            <a href="{{route('user.index')}}" class="dropdown-item"><i class="fa fa-users"></i> All users</a>
+                           <a href="{{route('user.show',[auth()->user()->id])}}" class="dropdown-item"><i class="fa fa-history"></i> My Transactions</a>
+                            <a href="{{route('password.change',[auth()->user()->id])}}" class="dropdown-item"><i class="fa fa-key"></i> Change password</a>
                             <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                <i class="fa fa-sign-out-alt"></i> {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -127,4 +127,6 @@
   </div>
 </nav>
 @endauth
-<a href="{{route('staff')}}" style="position: fixed;z-index: 1200; bottom: 10px; right: 10px; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0px 10px 10px rgba(0,0,0,.2);background-color: #000" title="sleep"></a>
+<a href="{{route('pause')}}" style="position: fixed;z-index: 1200; bottom: 10px; right: 10px; color: red; font-size: 60px" title="pause">
+    <i class="fa fa-pause-circle"></i>
+</a>

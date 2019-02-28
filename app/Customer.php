@@ -11,13 +11,16 @@ class Customer extends Model
     public function orders(){
         return $this->hasMany('App\Order');
     }
+    
     public function supplies(){
-        $collection = collect([]);
-        $supplies = $collection;
+        
+        $supplies = array();
         foreach($this->orders as $order){
-           $supplies = $collection->merge($order->supplies);
+            foreach($order->supplies as $supply){
+                array_push($supplies, $supply);
+            }
         }
-       return $supplies;
+       return collect($supplies)->sortByDesc('created_at');
     }
 
     public function fullname(){
@@ -38,10 +41,12 @@ class Customer extends Model
     public function totalSupplies(){
         $qty = 0;
         $amt = 0;
-        foreach($this->supplies() as $supply){
+        $supplies = $this->supplies();
+        foreach($supplies as $supply){
             $qty += $supply->quantity;
             $amt += $supply->ammount;  
         }
+       
         return ['quantity' => $qty, 'ammount' => $amt];
     }
 

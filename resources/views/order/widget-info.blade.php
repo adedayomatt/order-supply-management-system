@@ -4,6 +4,9 @@
                 Customer: <strong><a href="{{route('customer.show',[$order->customer->id])}}">{{$order->customer->fullname()}}</a></strong>
             </p>
             <p>
+                Type: <strong class="type">{{$order->type}}</strong>
+            </p>
+            <p>
                 Outstanding: <strong class="figure">{{number_format($order->outstanding()['quantity'])}}</strong> {{$_unit}} 
             </p>
             <p>

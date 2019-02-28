@@ -15,7 +15,9 @@ class RedirectIfNotManager
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::guard()->check() && Auth::guard()->user()->position !== 3) {
+        if (Auth::guard()->user()->isMD() || Auth::guard()->user()->isManager()) {
+        
+        }else{
             return redirect()->back()->with('info','You do not have authorization!');
         }
 

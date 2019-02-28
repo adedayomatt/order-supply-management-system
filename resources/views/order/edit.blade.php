@@ -13,6 +13,17 @@
             @method('PUT')
 
             <div class="form-group">
+                    <label for="">Product type</label>
+                    <select name="product_type" id="">
+                        <option value="unicem" {{$order->type == 'unicem' ? 'selected' : ''}}>Unicem</option>
+                        <option value="superset"  {{$order->type == 'superset' ? 'selected' : ''}}>Superset</option>
+                        <option value="elephant"  {{$order->type == 'elephant' ? 'selected' : ''}}>Elephant</option>
+                        <option value="dangote"  {{$order->type == 'dangote' ? 'selected' : ''}}>Dangote</option>
+                        <option value="dua"  {{$order->type == 'dua' ? 'selected' : ''}}>Dua</option>
+                    </select>
+                </div>
+
+            <div class="form-group">
                 <label for="quantity">Quantity ordering for</label>
                 <input type="number" class="form-control" name="quantity" placeholder="quantity requesting for..." value="{{$order->quantity}}" autofocus required>
             </div>
@@ -31,7 +42,7 @@
         <div class="grey text-center">
             <h4>This order has already been closed since <strong>{{$order->closed_at()}}</strong></h4>
             <p>You can create another for <strong>{{$order->customer->firstname}}</strong></p>
-            <a href="{{route('order.create',[$order->customer->id])}}" class="btn btn-primary">Create new order</a>
+            <a href="{{route('order.create',[$order->customer->id])}}" class="btn btn-primary"><i class="fa fa-plus"></i> Create new order</a>
         </div>
     @endif
 </div>

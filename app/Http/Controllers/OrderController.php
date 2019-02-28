@@ -12,7 +12,10 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('manager')->except([
+            'index',
+            'show'
+        ]);
     }
 
     /**
@@ -25,7 +28,7 @@ class OrderController extends Controller
         $month = Input::get('month');
 
         if($month !== null){
-            $p = explode('-',$filter);
+            $p = explode('-',$month);
             $orders = Order::whereYear('created_at',$p[0])->whereMonth('created_at',$p[1])->get();
             if($orders->count() > 0){
                 $date = new DateTime($orders->first()->created_at);
@@ -52,6 +55,14 @@ class OrderController extends Controller
         return view('order.create');
     }
 
+    public function rules(){
+        return [
+            'customer' => 'required',
+            'product_type' => 'required',
+            'quantity' => 'required|numeric',
+            'ammount' => 'required|numeric'
+        ];
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -60,17 +71,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'customer' => 'required',
-            'quantity' => 'required|numeric',
-            'ammount' => 'required|numeric'
-        ]);
+        $this->validate($request,$this->rules());
         
         $customer = Customer::findorfail($request->customer);
         $order = new Order();
         $order->customer_id = $customer->id;
         $order->user_id = Auth::id();
         $order->quantity = $request->quantity;
+        $order->type = $request->product_type;
         $order->ammount = $request->ammount;
         $order->note = $request->note;
         $order->save();
@@ -111,19 +119,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request,[
-        //     'customer' => 'required',
-        //     'quantity' => 'required|numeric',
-        //     'ammount' => 'required|numeric'
-        // ]);
+        $this->validate($request,$this->rules());
         
-        // $order = Order::findorfail($id);
-        // $order->quantity = $request->quantity;
-        // $order->ammount = $request->ammount;
-        // $order->note = $request->note;
-        // $order->save();
+        $order = Order::findorfail($id);
+        $order->quantity = $request->quantity;
+        $order->type = $request->product_type;
+        $order->ammount = $request->ammount;
+        $order->note = $request->note;
+        $order->save();
 
-        // return redirect()->route('order.show',[$order->id])->with('success','Order #'.$order->id.' for '.$customer->fullname().' updated');
+        return redirect()->route('order.show',[$order->id])->with('success','Order #'.$order->id.' for '.$customer->fullname().' updated');
     }
 
     public function close($order){
@@ -134,6 +139,7 @@ class OrderController extends Controller
 
         return redirect()->route('order.show',[$order->id])->with('success','Order closed');
     }
+
     public function open($order){
         $order = Order::findorfail($order);
         $order->closed_at = null;
@@ -153,6 +159,11 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = Order::findorfail($id);
+        if($order->supplies->count() >0){
+            foreach($order->supplies as $supply){
+                $supply->delete();
+            }
+        }
         $order->delete();
 
         return redirect()->route('order.index')->with('success','Order #'.$order->id.' for '.$customer->fullname().' deleted');

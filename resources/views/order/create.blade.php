@@ -28,6 +28,16 @@
                 @endif
 
                 <div class="form-group">
+                    <label for="">Product type</label>
+                    <select name="product_type" class="form-control" required>
+                        <option value="unicem">Unicem</option>
+                        <option value="superset">Superset</option>
+                        <option value="elephant">Elephant</option>
+                        <option value="dangote">Dangote</option>
+                        <option value="dua">Dua</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="quantity">Quantity ordering for</label>
                     <input type="number" class="form-control" name="quantity" placeholder="quantity requesting for..." value="{{old('quantity')}}" autofocus required>
                 </div>
@@ -38,7 +48,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ammount">Note</label>
+                    <label for="ammount">Note <small><i>(optional)</i></small></label>
+                    <br>
                     <small class="grey">Important notes about this order</small>
                     <textarea name="note" id="note" class="ckeditor form-control"></textarea>
                 </div>

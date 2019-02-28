@@ -15,7 +15,7 @@ class RedirectIfNotMD
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::guard()->check() && Auth::guard()->user()->position !== 4) {
+        if (Auth::guard()->check() && !Auth::guard()->user()->isMD()) {
             return redirect()->back()->with('info','You do not have authorization!');
         }
 

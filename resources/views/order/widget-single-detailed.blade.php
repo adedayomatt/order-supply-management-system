@@ -6,7 +6,7 @@
                         <td colspan="2">Order</td>
                     </tr>
                     <tr>
-                        <td><strong class="figure">{{number_format($order->quantity)}}</strong> {{$_unit}}</td>
+                        <td><span class="type">{{$order->type}}, </span><strong class="figure">{{number_format($order->quantity)}}</strong> {{$_unit}}</td>
                         <td><strong class="figure">&#8358; {{number_format($order->ammount)}}</strong></td>
                     </tr>
                 </table>
@@ -35,7 +35,7 @@
             </div>
             @if($order->isSuppliable())
                 <div class="text-right">
-                    <small><a href="{{route('supply.create',[$order->id])}}" class="btn btn-sm btn-success">New supply</a></small>
+                    <small><a href="{{route('supply.create',[$order->id])}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New supply</a></small>
                 </div>
             @endif
         </div>

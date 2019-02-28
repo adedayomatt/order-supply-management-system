@@ -75,14 +75,14 @@
                 <div style="padding-top: 3%">
                     <div class="p-5 text-center"style="background-color: rgba(0,0,0,.5); color: #fff;" >
                         <h1 style="font-size: 60px">Global 50-50</h1>
-                            <h4>How is going today <strong>{{auth()->user()->fullname()}} ?</strong></h4>
+                            <h4>How is going today <strong>{{auth()->user()->fullname()}} ???</strong></h4>
                             <div>
                                 <iframe src="http://free.timeanddate.com/clock/i6m40vau/n1972/szw210/szh210/hocfff/hbw0/cf100/hgr0/fas28/facfff/fdi90/mqc000/mqs2/mql3/mqw4/mqd70/mhc000/mhs2/mhl3/mhw4/mhd70/mmv0/hwm2/hhs3/hms3/hsc00f" frameborder="0" width="210" height="210"></iframe>
                             </div>
                             <div>
                             <iframe src="http://free.timeanddate.com/clock/i6m40vau/n1972/fn7/fs20/fcfff/tct/pct/ftb/th2" frameborder="0" width="128" height="30" allowTransparency="true"></iframe>
                             </div>
-                            <a href="{{route('transactions')}}" class="btn btn-lg btn-secondary">continue</a>
+                            <a href="{{route('index')}}" class="btn btn-lg btn-primary">Get back to work <i class="fa fa-play-circle" style="font-size: 30px"></i></a>
                     </div>
                 </div>
 

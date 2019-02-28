@@ -11,8 +11,12 @@ class CustomerController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth');
-        //$this->middleware('md')->except(['index','show']);
+        $this->middleware('manager')->except([
+            'index',
+            'show',
+            'orders',
+            'supplies'
+        ]);
        }
     /**
      * Display a listing of the resource.

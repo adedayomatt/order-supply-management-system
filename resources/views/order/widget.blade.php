@@ -13,6 +13,9 @@
                             
                             <div class="d-flex my-2">
                                 <div class="mr-auto">
+                                    Type: <span class="type">{{$order->type}}</span>
+                                </div>
+                                <div class="mr-auto">
                                     Quantity: <strong class="figure">{{number_format($order->quantity)}}</strong>{{$_unit}}
                                 </div>
                                 <div class="ml-auto">

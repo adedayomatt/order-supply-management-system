@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Input;
 class SupplyController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('manager')->except([
+            'index',
+            'show'
+        ]);
     }
 
     /**
@@ -72,8 +75,8 @@ class SupplyController extends Controller
         Supply::create([
             'order_id' => $request->order,
             'user_id' => Auth::id(),
-            'quantity' => $request->quantity,
-            'ammount' => $request->ammount,
+            'quantity' => $request->quantity == null ? 0 : $request->quantity,
+            'ammount' => $request->ammount == null ? 0 : $request->ammount,
             'note' => $request->note,
             'bank' => $request->bank,
             'transaction_id' => $request->transaction,

@@ -11,7 +11,7 @@
 
 @section('main')
     <div class="content-box">
-        <h5>Supplies</h5>
+        <h5>Supplies/Payments</h5>
         @include('supply.widget-table')
     </div>
 @endsection

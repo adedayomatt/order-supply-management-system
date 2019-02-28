@@ -13,7 +13,7 @@
                         <form action="{{route('order.close',[$order->id])}}" method="POST">
                             @csrf
                             @method('PUT')
-                            <input type="submit" class="btn btn-danger" value="close order">
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-lock"></i> Close order</button>
                         </form>
                     </div>
                     @else
@@ -21,7 +21,7 @@
                         <form action="{{route('order.open',[$order->id])}}" method="POST">
                             @csrf
                             @method('PUT')
-                            <input type="submit" class="btn btn-primary" value="Re open order">
+                            <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-lock-open"></i> Re-open order</button>
                         </form>
                     </div>
                 @endif
@@ -34,13 +34,13 @@
 
 
 <div class="content-box">
-    <h4>Supply History</h4>
+    <h5><i class="fa fa-history"></i> Supply/Payment History</h5>
     @if($order->supplies->count() > 0)
         <?php $supplies = $order->supplies ?>
         @include('supply.widget-table')
     @else
         <div class="grey text-center p-2">
-           No supply recorded for this order yet
+           No supply/payment recorded for this order yet
             <a href="{{route('supply.create',[$order->id])}}" class="btn btn-success">Record supply</a>
         </div>
     @endif
