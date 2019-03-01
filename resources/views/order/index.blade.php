@@ -51,7 +51,7 @@
                         <td>
                             <a href="{{route('order.show',[$order->id])}}" class="btn btn-primary btn-sm m-1"><i class="fa fa-eye"></i> View Order</a>
                             @if(!$order->closed())
-                                <a href="{{route('supply.create',[$order->id])}}" class="btn btn-info btn-sm m-1"><i class="fa fa-plus"></i> New supply/payment</a>
+                                <a href="{{route('supply.create',[$order->id])}}" class="btn btn-info btn-sm m-1"><i class="fa fa-plus"></i> New transaction</a>
                             @endif                          
                         </td>
                     </tr>

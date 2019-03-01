@@ -9,7 +9,7 @@
         <h5 class="grey"><i class="fa fa-user-tie"></i> Staff</h5>
         <h4>{{$user->fullname()}}</h4>
         <h5 class="grey">{{$user->position()}}</h5>
-        @if(auth()->user()->isManager())
+        @if(auth()->user()->isMD() || auth()->user()->isManager() )
             <a href="{{route('user.edit',[$user->id])}}"> <i class="fa fa-pen"></i> Edit</a>
         @endif
 
@@ -39,7 +39,7 @@
               <div class="grey text-center">
                 @if(auth()->user()->id === $user->id)
                   You have not created any order
-                <a href="{{route('order.create')}}" class="btn btn-primary">Create order</a>
+                <a href="{{route('order.create')}}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create order</a>
                 @else
                   {{$user->fullname()}} have not created any order
                 @endif

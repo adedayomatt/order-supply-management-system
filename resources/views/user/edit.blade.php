@@ -77,10 +77,10 @@
 
                                 <div class="">
                                     <select name="position" id="position" class="form-control" required>
-                                        <option value="1" {{$user->position === 1 ? 'selected' : ''}}>Customer Service</option>
-                                        <option value="2" {{$user->position === 2 ? 'selected' : ''}}>Marketer</option>
-                                        <option value="3" {{$user->position === 3 ? 'selected' : ''}}>Manager</option>
-                                        <option value="4" {{$user->position === 4 ? 'selected' : ''}}>Managing Director</option>
+                                        <option value="1" {{$user->position == 1 ? 'selected' : ''}}>Customer Service</option>
+                                        <option value="2" {{$user->position == 2 ? 'selected' : ''}}>Marketer</option>
+                                        <option value="3" {{$user->position == 3 ? 'selected' : ''}}>Manager</option>
+                                        <option value="4" {{$user->position == 4 ? 'selected' : ''}}>Managing Director</option>
                                     </select>
                                     @if ($errors->has('position'))
                                         <span class="help-block">

@@ -26,8 +26,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id' != 1)->orderby('created_at','desc')->get();
-        return view('user.index')->with('users',User::all());
+        $users = User::where('id','>', 1)->orderby('created_at','desc')->get();
+        return view('user.index')->with('users',$users);
     }
 
     /**

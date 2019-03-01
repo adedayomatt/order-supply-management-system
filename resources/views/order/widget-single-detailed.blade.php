@@ -35,7 +35,7 @@
             </div>
             @if($order->isSuppliable())
                 <div class="text-right">
-                    <small><a href="{{route('supply.create',[$order->id])}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New supply</a></small>
+                    <small><a href="{{route('supply.create',[$order->id])}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New transaction</a></small>
                 </div>
             @endif
         </div>

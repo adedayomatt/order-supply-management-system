@@ -14,7 +14,7 @@
         </thead>
         <tbody>
         @if($customer->supplies()->count() > 0)
-            @foreach($customer->supplies() as $supply)
+            @foreach($customer->supplies()->sortByDesc('created_at') as $supply)
                 <tr>
                     <td><a href="{{route('order.show',[$supply->order->id])}}">{{$supply->order->id()}}</a></td>
                     <td>{{number_format($supply->quantity)}}</td>

@@ -8,7 +8,7 @@
       <div class="col-md-8">
         <h5 class="grey"><i class="fa fa-user"></i> Customer</h5>
         <h4>{{$customer->fullname()}}</h4>
-        @if(Auth::user()->isManager())
+        @if(Auth::user()->isMD() || Auth::user()->isManager())
           <a href="{{route('customer.edit',[$customer->id])}}"><i class="fa fa-pen"></i> Edit</a>
         @endif
 

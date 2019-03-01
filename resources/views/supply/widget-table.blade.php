@@ -18,7 +18,7 @@
     </thead>
     <tbody>
         @if($collection->count() > 0)
-        @foreach($collection as $supply)
+        @foreach($collection->sortByDesc('created_at') as $supply)
             <tr>
                 <td>{{$supply->order->id()}}</td>
                 <td>

@@ -90,9 +90,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{route('order.create')}}"><i class="fa fa-question-circle"></i> New Order</a>
                 <div class="dropdown-divider"></div>
-                @if(auth()->user()->position === 4)
-                    <a class="dropdown-item" href="{{route('user.create')}}"><i class="fa fa-user-tie"></i> New User</a>
-                @endif
+                <a class="dropdown-item" href="{{route('user.create')}}"><i class="fa fa-user-tie"></i> New User</a>
             </div>
       </li>
     </ul>
@@ -126,7 +124,8 @@
         </ul>
   </div>
 </nav>
-@endauth
 <a href="{{route('pause')}}" style="position: fixed;z-index: 1200; bottom: 10px; right: 10px; color: red; font-size: 60px" title="pause">
     <i class="fa fa-pause-circle"></i>
 </a>
+@endauth
+
