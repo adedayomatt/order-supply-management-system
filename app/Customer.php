@@ -41,10 +41,12 @@ class Customer extends Model
     public function totalSupplies(){
         $qty = 0;
         $amt = 0;
-        $supplies = $this->supplies();
-        foreach($supplies as $supply){
-            $qty += $supply->quantity;
-            $amt += $supply->ammount;  
+        $supplies = array();
+        foreach($this->orders as $order){
+            foreach($order->supplies->where('reverted_at',null) as $supply){
+                $qty += $supply->quantity;
+                $amt += $supply->ammount; 
+            }
         }
        
         return ['quantity' => $qty, 'ammount' => $amt];
