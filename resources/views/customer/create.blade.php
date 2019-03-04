@@ -41,7 +41,7 @@
                     <label for="email" class="control-label">E-Mail Address</label>
 
                     <div class="">
-                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="customer's email address" required autofocus>
+                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="customer's email address" autofocus>
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>

@@ -73,6 +73,7 @@
                                     <div class="form-group">
                                         <label for="bank">Bank</label><br>
                                         <select name="bank" id="bank" class="form-control" style="width: 200px">
+                                            <option value="Cash">Cash</option>
                                             <option value="First Bank">First Bank</option>
                                             <option value="EcoBank">EcoBank</option>
                                             <option value="GTBank">GTBank</option>
