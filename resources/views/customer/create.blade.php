@@ -27,7 +27,7 @@
                     <label for="lastname" class="control-label">Last Name</label>
 
                     <div class="">
-                        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="customer's last name" required autofocus>
+                        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="customer's last name" autofocus>
 
                         @if ($errors->has('lastname'))
                             <span class="help-block">
