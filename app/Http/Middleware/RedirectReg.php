@@ -15,7 +15,7 @@ class RedirectReg
      */
     public function handle($request, Closure $next)
     {
-        return redirect()->back()->with('info','Not allowed!');
+        return redirect()->back()->with('warning','Not allowed!');
 
         return $next($request);
     }

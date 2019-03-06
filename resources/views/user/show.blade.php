@@ -6,10 +6,10 @@
 <div class="content-box">
     <div class="row align-items-center">
       <div class="col-md-8">
-        <h5 class="grey"><i class="fa fa-user-tie"></i> Staff</h5>
+        <h5 class="grey"><i class="fa fa-user-tie"></i> User</h5>
         <h4>{{$user->fullname()}}</h4>
         <h5 class="grey">{{$user->position()}}</h5>
-        @if(auth()->user()->isMD() || auth()->user()->isManager() )
+        @if(auth()->user()->isSuperAdmin() || auth()->user()->isMD() || auth()->user()->isManager() || auth()->user()->isAdmin())
             <a href="{{route('user.edit',[$user->id])}}"> <i class="fa fa-pen"></i> Edit</a>
         @endif
 
@@ -51,7 +51,7 @@
 
     <div class="col-md-6">
       <div class="content-box">
-      <h5>Supplies/Payments recorded by {{$user->firstname}}- {{$user->supplies()->count()}}</h5>
+      <h5>Transactions recorded by {{$user->firstname}}- {{$user->supplies()->count()}}</h5>
       <a href="{{route('user.supplies',[$user->id])}}">view supplies</a>
       <div class="scrollable">
         <?php $supplies = $user->supplies ?>
@@ -62,7 +62,7 @@
 
     <div class="col-md-2">
       <div class="content-box">
-        <p>Supplies reverted by {{$user->firstname}} - {{$user->orders->count()}}</p>
+        <p>Transactions reverted by {{$user->firstname}} - {{$user->orders->count()}}</p>
           <div class="scrollable">
             @if($user->reverts()->count() > 0)
                 <div class="list-group">

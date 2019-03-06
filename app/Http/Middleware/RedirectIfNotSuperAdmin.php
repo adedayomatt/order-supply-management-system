@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-class RedirectIfNotMD
+
+class RedirectIfNotSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -15,12 +16,9 @@ class RedirectIfNotMD
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->isSuperAdmin() || Auth::user()->isMD()) {
-            
-        }else{
+        if(!Auth::user()->isSuperAdmin()){
             return redirect()->back()->with('warning','You do not have authorization!');
         }
-        
         return $next($request);
     }
 }

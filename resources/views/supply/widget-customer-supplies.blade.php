@@ -54,7 +54,7 @@
             @else
                 <tr class="text-danger text-center">
                     <td colspan="8">
-                        <i class="fa fa-exclamation-triangle"></i> {{$customer->fullname()}} does not have any supply record
+                        <i class="fa fa-exclamation-triangle"></i> {{$customer->fullname()}} does not have any transaction record
                     </td>
                 </tr>
             @endif

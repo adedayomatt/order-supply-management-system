@@ -46,34 +46,49 @@ class User extends Authenticatable
     }
     public function position(){
         switch($this->position){
-            case 4:
+            case 1:
+                return 'Super Admin';
+            break;
+            case 2:
                 return 'Managing Director';
             break;
             case 3:
                 return 'Manager';
             break;
-            case 2:
+            case 4:
+                return 'Admin';
+            break;
+            case 5:
                 return 'Marketer';
             break;
-            case 1:
-                return 'Customer care';
+            case 6:
+                return 'Customer Care';
             break;
+
             default:
                 return 'Regular';
             break;
         }
     }
+
+    public function isSuperAdmin(){
+        return $this->position == 1 ? true : false;
+    }
     public function isMD(){
-        return $this->position == 4 ? true : false;
+        return $this->position == 2 ? true : false;
     }
     public function isManager(){
         return $this->position == 3 ? true : false;
     }
+
+    public function isAdmin(){
+        return $this->position == 4 ? true : false;
+    }
     public function isMarketer(){
-        return $this->position == 2 ? true : false;
+        return $this->position == 5 ? true : false;
     }
     public function isCC(){
-        return $this->position == 1 ? true : false;
+        return $this->position == 6 ? true : false;
     }
 
     public function avatar(){

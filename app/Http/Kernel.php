@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
 
         'md' => \App\Http\Middleware\RedirectIfNotMD::class,
         'manager' => \App\Http\Middleware\RedirectIfNotManager::class,
+        'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
+        'superadmin' => \App\Http\Middleware\RedirectIfNotSuperAdmin::class,
         'noreg' => \App\Http\Middleware\RedirectReg::class
     ];
 

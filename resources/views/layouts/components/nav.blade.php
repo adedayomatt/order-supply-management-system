@@ -56,13 +56,13 @@
 
         <li class="nav-item ">
             <a href="{{route('supplies')}}" class="nav-link">
-                <i class="fa fa-upload"></i> All supplies
+                <i class="fa fa-upload"></i> All transactions
             </a>
         </li>
 
         <li class="nav-item dropdown">
             <a href="{{route('supplies')}}" class="nav-link dropdown-toggle" id="supplies-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-calendar"></i> Monthly supplies
+            <i class="fa fa-calendar"></i> Monthly transaction
             </a>
             <div class="dropdown-menu" id="nav-supplies" aria-labelledby="supplies-dropdown">
                       <div class="dropdown-item">

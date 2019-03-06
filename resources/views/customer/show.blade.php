@@ -60,8 +60,8 @@
 
     <div class="col-md-8">
       <div class="content-box">
-      <h5>Supplies/Payments - {{$customer->supplies()->count()}}</h5>
-      <a href="{{route('customer.supplies',[$customer->id])}}">view supplies</a>
+      <h5>Transactions - {{$customer->supplies()->count()}}</h5>
+      <a href="{{route('customer.supplies',[$customer->id])}}">view transactions</a>
       <div class="scrollable">
           @include('supply.widget-customer-supplies')
       </div>
