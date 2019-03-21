@@ -16,16 +16,22 @@ class CreateSuppliesTable extends Migration
         Schema::create('supplies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('order_id');
-            $table->integer('quantity')->default(0);
-            $table->integer('ammount')->default(0);
+            $table->integer('customer_id')->unsigned();
+            $table->string('type');
+            $table->integer('quantity');
+            $table->bigInteger('value');
             $table->longText('note')->nullable();
-            $table->timestamp('supplied_at')->default(now());
-            $table->string('bank')->nullable();
-            $table->string('transaction_id')->nullable();
+            $table->timestamp('supplied_at');
             $table->integer('reverted_by')->nullable();
             $table->timestamp('reverted_at')->nullable();
             $table->timestamps();
+
+            $table->index('customer_id');
+            $table->foreign('customer_id')
+                    ->references('id')
+                    ->on('customers')
+                    ->onDelete('cascade');
+
         });
     }
 

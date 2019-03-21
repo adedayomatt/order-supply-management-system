@@ -9,7 +9,7 @@
   <form action="{{route('customer.index')}}" class="form-inline">
     <div class="form-group">
         <select name="customer" id="" class="form-control" style="min-width: 250px; border-radius: 3px 0px 0px 3px">
-                <?php $customers = $_customers::orderby('created_at','desc')->get()?>
+                <?php $customers = $_customer::orderby('created_at','desc')->get()?>
                 @foreach($customers as $customer)
                     <option value="{{$customer->id}}">{{$customer->fullname()}}</option>
                 @endforeach
@@ -27,40 +27,21 @@
                <i class="fa fa-users"></i> Customers
             </a>
         </li>
-        <li class="nav-item ">
-            <a href="{{route('order.index')}}" class="nav-link">
-               <i class="fa fa-question-circle"></i> All Orders
-            </a>
-        </li>
-
-        <li class="nav-item dropdown">
-            <a href="{{route('order.index')}}" class="nav-link dropdown-toggle" id="orders-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-calendar"></i> Monthly Orders
-            </a>
-            <div class="dropdown-menu" id="nav-orders" aria-labelledby="orders-dropdown">
-                      <div class="dropdown-item">
-                        <form action="{{route('order.index')}}" >
-                            <div class="form-group">
-                            <label for="">Select month</label>
-                                <input type="month" name="month" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" value="Show Orders" class="btn btn-primary btn-block">
-                            </div>
-
-                        </form>
-                      </div> 
-            </div>
-        </li>
 
         <li class="nav-item ">
             <a href="{{route('supplies')}}" class="nav-link">
-                <i class="fa fa-upload"></i> All transactions
+                <i class="fa fa-upload"></i> Supplies
             </a>
         </li>
 
-        <li class="nav-item dropdown">
+        <li class="nav-item ">
+            <a href="{{route('payments')}}" class="nav-link">
+                <i class="fa fa-upload"></i> Payments
+            </a>
+        </li>
+
+
+        <!-- <li class="nav-item dropdown">
             <a href="{{route('supplies')}}" class="nav-link dropdown-toggle" id="supplies-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-calendar"></i> Monthly transaction
             </a>
@@ -79,7 +60,7 @@
                         </form>
                       </div> 
             </div>
-        </li>
+        </li> -->
 
       <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="create-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -88,7 +69,9 @@
                 <div class="dropdown-menu" aria-labelledby="create-dropdown">
                 <a class="dropdown-item" href="{{route('customer.create')}}"><i class="fa fa-user"></i> New Customer</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{route('order.create')}}"><i class="fa fa-question-circle"></i> New Order</a>
+                <a class="dropdown-item" href="{{route('supply.create')}}"><i class="fa fa-question-circle"></i> New Supply</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{route('payment.create')}}"><i class="fa fa-question-circle"></i> New Payment</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{route('user.create')}}"><i class="fa fa-user-tie"></i> New User</a>
             </div>

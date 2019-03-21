@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect()->route('transactions')->with('info','Already logged in');
+            return redirect()->route('index')->with('info','Already logged in');
         }
 
         return $next($request);

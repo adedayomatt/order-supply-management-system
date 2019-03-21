@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
             'lastname' => 'Matthew',
             'email' => 'adedayomatt@gmail.com',
             'phone' => '08139004572',
-            'position' => 4,
+            'position' => 1,
             'password' => Hash::make('pass')
         ]);
     }

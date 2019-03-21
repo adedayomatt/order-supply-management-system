@@ -1,18 +1,17 @@
 @extends('layouts.appRHSfixed')
-
-
 @section('main')
+
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-               <h5>New Supply</h5>
+               <h5>New Payment</h5>
             </div>
             <div class="card-body">
-                <form action="{{route('supply.store')}}" method="POST">
+                <form action="{{route('payment.store')}}" method="POST">
                     @csrf
                     @if(isset($customer))
-                        <p>For  <a href="{{route('customer.show',[$customer->id])}}">{{$customer->fullname()}}</a></p>
+                        <p>Add Money to <a href="{{route('customer.show',[$customer->id])}}">{{$customer->fullname()}}</a> wallet</p>
                         <input type="hidden" name="customer" value="{{$customer->id}}">
                     @else
                         <div class="form-group">
@@ -27,30 +26,31 @@
                             </select>
                         </div>
                     @endif
+                       
                     <div class="form-group">
-                        <label for="">Product type</label>
-                        <select name="product_type" class="form-control" required>
-                            <option value="unicem" {{old('product_type') == 'unicem' ? 'selected' : ''}}>Unicem</option>
-                            <option value="superset" {{old('product_type') == 'supaset' ? 'selected' : ''}}>Supaset</option>
-                            <option value="elephant" {{old('product_type') == 'elephant' ? 'selected' : ''}}>Elephant</option>
-                            <option value="dangote" {{old('product_type') == 'dangote' ? 'selected' : ''}}>Dangote</option>
-                            <option value="dua" {{old('product_type') == 'bua' ? 'selected' : ''}}>Bua</option>
+                        <label for="ammount">Ammount</label>
+                        <input type="number" class="form-control" name="ammount" placeholder="ammount paid..." value="{{old('ammount')}}" autofocus >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank">Bank</label><br>
+                        <select name="bank" id="bank" class="form-control" style="width: 200px">
+                            <option value="Cash">Cash</option>
+                            <option value="First Bank">First Bank</option>
+                            <option value="EcoBank">EcoBank</option>
+                            <option value="GTBank">GTBank</option>
+                            <option value="Fidelity Bank">Fidelity Bank</option>
+                            <option value="Zenith Bank">Zenith Bank</option>
+                            <option value="Union Bank">Union Bank</option>
+                            <option value="UBA">UBA</option>
+                            <option value="Polaris Bank">Polaris Bank</option>
+                            <option value="Diamond Bank">Diamond Bank</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="quantity">Quantity supplied</label>
-                        <input type="number" class="form-control" name="quantity" placeholder="quantity supplied..." value="{{old('quantity')}}" autofocus required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ammount">Value</label>
-                        <input type="number" class="form-control" name="quantity_value" placeholder="how much is it worth?" value="{{old('quantity_value')}}" autofocus required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="date_supplied">Date supplied</label>
-                        <input type="date" class="form-control" name="date_supplied" value="{{old('date_supplied')}}">
+                        <label for="date_supplied">Date paid</label>
+                        <input type="date" class="form-control" name="date_paid" value="{{old('date_paid')}}">
                     </div>
 
                     <div class="form-group">
@@ -60,9 +60,9 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Add supply</button>
+                        <input type="submit" class="btn btn-primary btn-block" value="Add Payment">
                     </div>
-                </form>    
+                </form>
             </div>
         </div>
     </div>
@@ -74,20 +74,20 @@
     @if(isset($customer))
      <div class="card">
         <div class="card-header">
-            <h5>{{$customer->firstname}} prev. supplies</h5>
+            <h5>{{$customer->firstname}} prev. payments</h5>
         </div>
         <div class="card-body">
-            <?php $supply_collection = $customer->supplies ?>
-            @include('supply.widgets.default')
+            <?php $payment_collection = $customer->payments ?>
+            @include('payment.widgets.default')
         </div>
      </div>
     @else
     <div class="card">
         <div class="card-header">
-            <h5>Recent Supplies</h5>
+            <h5>Recent Payments</h5>
         </div>
         <div class="card-body">
-           @include('supply.widgets.default')
+           @include('payment.widgets.default')
         </div>
      </div>
     @endif

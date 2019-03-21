@@ -3,7 +3,7 @@
 namespace App\Providers;
 use App\User;
 use App\Customer;
-use App\Order;
+use App\Payment;
 use App\Supply;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
@@ -20,10 +20,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         $Global = array(
-            '_users' => User::class,
-			'_customers' => Customer::class, 
-            '_orders' => Order::class,
-            '_supplies' => Supply::class,
+            '_user' => User::class,
+			'_customer' => Customer::class, 
+            '_supply' => Supply::class,
+            '_payment' => Payment::class,
             '_unit' => 'Bags'
 		);
 		View::share($Global);

@@ -6,16 +6,18 @@ use App\Supply;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'firstname', 'lastname','email', 'password','avatar'
     ];
@@ -29,8 +31,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function orders(){
-        return $this->hasMany('App\Order');
+    public function payments(){
+        return $this->hasMany('App\Payment');
     }
 
     public function supplies(){
@@ -44,6 +46,12 @@ class User extends Authenticatable
     public function fullname(){
         return $this->firstname.' '.$this->lastname;
     }
+
+    public function isDeleted(){
+        return $this->deleted_at == null ? false : true;
+    }
+
+
     public function position(){
         switch($this->position){
             case 1:

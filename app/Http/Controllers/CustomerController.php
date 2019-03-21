@@ -11,13 +11,16 @@ class CustomerController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('manager')->except([
+        $this->middleware('admin')->except([
             'index',
             'show',
             'orders',
             'supplies'
         ]);
        }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +34,38 @@ class CustomerController extends Controller
         return view('customer.index')->with('customers',Customer::all());
     }
 
+    public function newPayment($id){
+        return view('payment.create')->with('customer', Customer::findorfail($id));
+    }
+    
+    public function payments($id){
+        $month = Input::get('month');
+        $year = Input::get('year');
+        $customer = Customer::findorfail($id);
+        $payments = $customer->getPayments($month, $year);
+        return view('payment.index')->with('customer', $customer)
+                                    ->with('payments',$payments->payments)
+                                    ->with('period',$payments->period);
+
+    }
+
+
+    public function newSupply($id){
+        return view('supply.create')->with('customer', Customer::findorfail($id));
+    }
+
+    public function supplies($id){
+        $month = Input::get('month');
+        $year = Input::get('year');
+        $customer = Customer::findorfail($id);
+
+        $supplies = $customer->getSupplies($month, $year);
+        return view('supply.index')->with('customer', $customer)
+                                    ->with('supplies',$supplies->supplies)
+                                    ->with('period',$supplies->period);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,11 +74,6 @@ class CustomerController extends Controller
     public function create()
     {
         return view('customer.create');
-    }
-
-    public function order($id){
-        $customer = Customer::findorfail($id);
-        return view('order.create')->with('customer',$customer);
     }
     /**
      * Store a newly created resource in storage.
@@ -79,19 +109,17 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
+        $month = Input::get('month');
+        $year = Input::get('year');
+        
         $customer = Customer::findorfail($id);
-        return view('customer.show')->with('customer',$customer);
+        
+        return view('customer.show')->with('customer',$customer)
+                                    ->with('wallet',$customer->getWallet($month, $year))
+                                    ->with('supplies', $customer->getSupplies($month, $year)->supplies)
+                                    ->with('payments', $customer->getPayments($month, $year)->payments);
     }
 
-    public function orders($customer){
-        $customer = Customer::findorfail($customer);
-        return view('order.index')->with('orders',$customer->orders)->with('orders',$customer->orders)->with('period','Recorded for customer - <strong><a href="'.route('customer.show',[$customer->id]).'">'.$customer->fullname().'</a></strong>');
-    }
-
-    public function supplies($customer){
-        $customer = Customer::findorfail($customer);
-        return view('supply.index')->with('supplies',$customer->supplies())->with('period','Recorded for customer - <strong><a href="'.route('customer.show',[$customer->id]).'">'.$customer->fullname().'</a></strong>');
-    }
 
     /**
      * Show the form for editing the specified resource.

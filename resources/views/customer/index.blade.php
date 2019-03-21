@@ -2,53 +2,54 @@
 @extends('layouts.app')
 
 @section('main')
-<div class="content-box">
-    @if($customers->count() > 0)
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Orders</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($customers as $customer)
+<div class="card">
+    <div class="card-header">
+        <h4>Customers</h4>
+    </div>
+    <div class="card-body scrollable">
+        @if($customers->count() > 0)
+            <table class="table table-striped table-bordered text-center">
+                <thead>
                     <tr>
-                        <td>#{{$customer->id}}</td>
-                        <td><i class="fa fa-user"></i> <strong><a href="{{route('customer.show',[$customer->id])}}">{{$customer->fullname()}}</a></strong></td>
-                        <td><a href="mailto: {{$customer->email}}">{{$customer->email}}</a></td>
-                        <td><a href="tel: {{$customer->phone}}">{{$customer->phone}}</a></td>
-                        <td>
-                            @if($customer->orders->count() > 0)
-                               <span class="grey">{{$customer->orders->count()}} orders:</span>
-                               @foreach($customer->orders as $order)
-                                    <small><a href="{{route('order.show',[$order->id])}}">{{$order->id()}}</a> [{!!$order->status()!!}]</small>, 
-                               @endforeach
-                            @else
-                                <small class="grey"><i class="fa fa-exclamation-triangle"></i> No order yet.</small>
-                            @endif
-
-                        </td>
-                        <td>
-                            <a href="{{route('customer.order',[$customer->id])}}" class="btn btn-sm btn-primary"> <i class="fa fa-plus"></i> New order</a>
-                            @if($customer->hasOutstandingOrders())
-                                <span class="animated flash infinite slow" data-toggle="tooltip" title="{{$customer->outstanding()['quantity']}} outstanding orders"><i class="fa fa-exclamation-triangle"></i></span>
-                            @endif
-                        </td>
+                        <th class="text-left">Name</th>
+                        <th>Contact</th>
+                        <th>Wallet</th>
+                        <th>Supplies</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <div class="text-center grey">
-            No Customer found 
-            <a href="{{route('customer.create')}}" class="btn btn-primary">Add one now</a>
-        </div>
-    @endif
+                </thead>
+                <tbody>
+                    @foreach($customers as $customer)
+                        <tr>
+                            <td class="text-left"><i class="fa fa-user"></i> <strong><a href="{{route('customer.show',[$customer->id])}}">{{$customer->fullname()}}</a></strong></td>
+                            <td>
+                                @if($customer->email != null)
+                                    <div class="text-center">
+                                        <a href="mailto: {{$customer->email}}">{{$customer->email}}</a>
+                                    </div>
+                                @endif
+                                @if($customer->phone != null)
+                                    <div class="text-center">
+                                        <a href="tel: {{$customer->phone}}">{{$customer->phone}}</a>
+                                    </div>
+                                @endif
+                            </td>
+                            <td class="{{$customer->wallet()->balance < 0 ? 'text-danger' : ''}}">
+                            &#8358; {{number_format($customer->wallet()->balance)}}
+                            </td>
+                            <td>
+                                {{number_format($customer->totalSupplies()['quantity'])}} {{$_unit}}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <div class="text-center grey">
+                No Customer found 
+                <a href="{{route('customer.create')}}" class="btn btn-primary">Add one now</a>
+            </div>
+        @endif
+    </div>
 </div>
 @endsection
 

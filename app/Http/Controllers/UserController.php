@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Matto\FileUpload;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Matto\FileUpload;
+use Illuminate\Support\Facades\Input;
+
 
 class UserController extends Controller
 {
@@ -93,14 +96,52 @@ class UserController extends Controller
 
         return view('user.show')->with('user',$user);
     }
-    public function orders($user){
-        $user = User::findorfail($user);
-        return view('order.index')->with('orders',$user->orders)->with('period','Recorded by user - <strong><a href="'.route('user.show',[$user->id]).'">'.$user->fullname().'</a></strong>');
+
+    public function payments($id){
+        $month = Input::get('month');
+        $year = Input::get('year');
+        $user = User::findorfail($id);
+
+        if($month != null && $year != null){
+            $payments = $user->payments()
+                                ->whereYear('paid_on',$year)
+                                ->whereMonth('paid_on',$month)
+                                ->orderBy('paid_on','desc')
+                                ->get();
+            $period = $payments->first() != null ? $payments->first()->paid_on->format('M, Y') : $month.', '.$year;
+
+        }
+        else{
+            $payments = $user->payments()->orderBy('paid_on','desc')->get();
+            $period = 'All';
+        }
+
+        return view('payment.index')->with('payments',$payments)
+                                    ->with('user', $user)
+                                    ->with('period',$period);
     }
 
-    public function supplies($user){
-        $user = User::findorfail($user);
-        return view('supply.index')->with('supplies',$user->supplies)->with('period','Recorded by user - <strong><a href="'.route('user.show',[$user->id]).'">'.$user->fullname().'</a></strong>');
+    public function supplies($id){
+        $month = Input::get('month');
+        $year = Input::get('year');
+        $user = User::findorfail($id);
+
+        if($month != null && $year != null){
+            $supplies = $user->supplies()
+                                ->whereYear('supplied_at',$year)
+                                ->whereMonth('supplied_at',$month)
+                                ->orderBy('supplied_at','desc')
+                                ->get();
+            $period = $supplies->first() != null ? $supplies->first()->supplied_at->format('M, Y') : $month.', '.$year;
+                            }
+        else{
+            $supplies = $user->supplies()->orderBy('supplied_at','desc')->get();
+            $period = 'All';
+        }
+        return view('supply.index')->with('supplies',$supplies)
+                                    ->with('user', $user)
+                                    ->with('period',$period);
+
     }
 
 
@@ -190,6 +231,6 @@ class UserController extends Controller
     {
         $user = User::findorfail($id);
         $user->delete();
-        return redirect()->route('user.index')->with('success', "$user->fullname() deleted");
+        return redirect()->route('user.index')->with('success', $user->fullname()." deleted");
     }
 }

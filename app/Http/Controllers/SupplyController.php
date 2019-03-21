@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use DateTime;
-use App\Order;
 use App\Supply;
+use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Input;
 class SupplyController extends Controller
 {
     public function __construct(){
-        $this->middleware('manager')->except([
+        $this->middleware('admin')->except([
             'index',
             'show'
         ]);
@@ -25,24 +25,35 @@ class SupplyController extends Controller
      */
     public function index()
     {
-        $filter = Input::get('month');
+        $month = Input::get('month');
+        $year = Input::get('year');
 
-        if($filter !== null){
-            $p = explode('-',$filter);
-            $supplies = Supply::whereYear('created_at',$p[0])->whereMonth('created_at',$p[1])->get();
-            if($supplies->count() > 0){
-                $date = new DateTime($supplies->first()->created_at);
-                $period = date_format($date,'F, Y');
+        if($month != null && $year != null){
+            if($month == 'all' && $year == 'all'){
+                $supplies = Supply::orderBy('supplied_at','desc')->get();
+                $period = 'All supplies';
             }
             else{
-                $period = $p[1].', '.$p[0];
-            }
+                $supplies = Supply::whereYear('supplied_at',$year)
+                            ->whereMonth('supplied_at',$month)
+                            ->orderBy('supplied_at','desc')
+                            ->get();
+
+                $period = $supplies->first() != null ? $supplies->first()->supplied_at->format('M, Y') : $month.', '.$year;
+                }
+        
         }
         else{
-            $supplies = Supply::orderby('created_at','desc')->get();
-            $period = 'All';
+            $supplies = Supply::whereYear('supplied_at',date('Y',time()))
+                            ->whereMonth('supplied_at',date('m',time()))
+                            ->orderBy('supplied_at','desc')
+                            ->get();
+            $period = 'This month: '.date('F, Y',time());
         }
-        return view('supply.index')->with('supplies',$supplies)->with('period',$period);
+
+        return view('supply.index')->with('supplies',$supplies)
+                                    ->with('period',$period);
+
     }
 
     /**
@@ -50,10 +61,9 @@ class SupplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($order)
+    public function create()
     {
-        $order = Order::findorfail($order);
-        return view('supply.create')->with('order',$order);
+        return view('supply.create');
     }
 
     /**
@@ -62,28 +72,28 @@ class SupplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$order)
+    public function store(Request $request)
     {
-        //     $this->validate($request, [
-        //     'order' => 'required',
-        //     'quantity' => 'required',
-        //     'ammount' => 'required',
-        //     'bank' => 'required',
-        // ]);
+            $this->validate($request, [
+            'customer' => ['required'],
+            'product_type' => ['required'],
+            'quantity' => ['required','min: 1'],
+            'quantity_value' => ['required'],
+            'date_supplied' => ['required','date'],
+        ]);
 
-        $order = Order::findorfail($order);
+        $customer = Customer::findorfail($request->customer);
         Supply::create([
-            'order_id' => $request->order,
+            'customer_id' => $request->customer,
             'user_id' => Auth::id(),
-            'quantity' => $request->quantity == null ? 0 : $request->quantity,
-            'ammount' => $request->ammount == null ? 0 : $request->ammount,
+            'type' => $request->product_type,
+            'quantity' => $request->quantity,
+            'value' => $request->quantity_value,
             'note' => $request->note,
-            'bank' => $request->bank,
-            'transaction_id' => $request->transaction,
             'supplied_at' => $request->date_supplied
         ]);
 
-        return redirect()->route('order.show',[$order->id])->with('success',$request->quantity.' supplied  to order <strong>'.$order->id().'</strong> for <strong>'.$order->customer->fullname().'</strong>');
+        return redirect()->route('customer.show',[$customer->id])->with('success',$request->quantity.' supplied  to <strong>'.$customer->fullname().'</strong>');
     }
 
     /**
@@ -103,10 +113,10 @@ class SupplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        return view('supply.edit')->with('supply',Supply::findorfail($id));
-    }
+    // public function edit($id)
+    // {
+    //     return view('supply.edit')->with('supply',Supply::findorfail($id));
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -115,19 +125,19 @@ class SupplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'customer' => 'required',
-            'quantity' => 'required',
-            'ammount' => 'required',
-        ]);
-        $supply = Supply::findorfail($id);
-        $supply->quantity = $request->quantity;
-        $supply->ammount = $request->ammount;
+    // public function update(Request $request, $id)
+    // {
+    //     $this->validate($request, [
+    //         'customer' => 'required',
+    //         'quantity' => 'required',
+    //         'ammount' => 'required',
+    //     ]);
+    //     $supply = Supply::findorfail($id);
+    //     $supply->quantity = $request->quantity;
+    //     $supply->ammount = $request->ammount;
 
-        return redirect()->route('supply.show',[$supply->id])->with('success','<strong>'.$supply->demand->customer->fullname().'</strong>\'s supply updated');
-    }
+    //     return redirect()->route('supply.show',[$supply->id])->with('success','<strong>'.$supply->demand->customer->fullname().'</strong>\'s supply updated');
+    // }
     /**
      * Remove the specified resource from storage.
      *
