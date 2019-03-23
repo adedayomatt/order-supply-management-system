@@ -36,8 +36,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('user','UserController');
     Route::get('user/{user}/payments','UserController@payments')->name('user.payments');
     Route::get('user/{user}/supplies','UserController@supplies')->name('user.supplies');
-    Route::get('user/{user}/password','UserController@changePassword')->name('password.change');
-    Route::put('user/{user}/password','UserController@updatePassword')->name('password.update');
+    Route::get('user/{user}/password','UserController@changePassword')->name('user.password.change');
+    Route::put('user/{user}/password','UserController@updatePassword')->name('user.password.update');
     
     Route::get('supplies','SupplyController@index')->name('supplies');
     Route::get('supply/create','SupplyController@create')->name('supply.create');

@@ -90,7 +90,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a href="{{route('user.index')}}" class="dropdown-item"><i class="fa fa-users"></i> All users</a>
                            <a href="{{route('user.show',[auth()->user()->id])}}" class="dropdown-item"><i class="fa fa-history"></i> My Transactions</a>
-                            <a href="{{route('password.change',[auth()->user()->id])}}" class="dropdown-item"><i class="fa fa-key"></i> Change password</a>
+                            <a href="{{route('user.password.change',[auth()->user()->id])}}" class="dropdown-item"><i class="fa fa-key"></i> Change password</a>
                             <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

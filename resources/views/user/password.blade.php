@@ -4,7 +4,7 @@
 @section('main')
 <div class="row justify-content-center">
     <div class="col-md-4 col-sm-6">
-            <form method="POST" action="{{ route('password.update',[$user->id]) }}" class="has-image-upload" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('user.password.update',[$user->id]) }}" class="has-image-upload" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                         <div class="content-box">

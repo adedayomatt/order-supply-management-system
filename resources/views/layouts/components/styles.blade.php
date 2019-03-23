@@ -7,12 +7,12 @@
 <!-- Extra CSS -->
 <style>
     body{
-        background-color: #DCEBF9;
-        /* background-image: url({{asset('storage/images/bg/cement.jpg')}});
+        /* background-color: #DCEBF9; */
+        background-image: url({{asset('storage/images/bg/sand.jpg')}});
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        background-attachment: fixed; */
+        background-attachment: fixed;
     }
     body::after{
 
