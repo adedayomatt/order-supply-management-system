@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('supply/create','SupplyController@create')->name('supply.create');
     Route::post('supply/ceate','SupplyController@store')->name('supply.store');
     Route::post('supply/{supply}/revert','SupplyController@revert')->name('supply.revert');
+    Route::delete('supply/{supply}/delete','SupplyController@delete')->name('supply.delete');
     
 });
 

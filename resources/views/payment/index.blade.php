@@ -8,6 +8,8 @@
             <div class="col-md-7">
                 @if(isset($customer))
                 <h5>{{$customer->fullname()}}</h5>
+                @elseif(isset($user))
+                    <h5><span style="font-size: 14px">payments recorded by </span><a href="{{route('user.show',[$user->id])}}">{{$user->fullname()}}</a></h5>
                 @endif
                 <h4>Period: <strong>{!!$period!!}</strong><span class="badge badge-primary figure">{{$payment_collection->count()}} records</span></h4> 
             </div>

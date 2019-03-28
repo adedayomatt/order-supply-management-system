@@ -39,7 +39,7 @@
 
   <div class="d-flex">
     <div>
-      <h4><i class="fa fa-calendar"></i> {{$wallet->period}}</h4>
+      <p class="grey"><i class="fa fa-calendar"></i> {{$wallet->period}}</p>
     </div>
     <div class="ml-auto">
       @if(request()->get('month') != 'all')

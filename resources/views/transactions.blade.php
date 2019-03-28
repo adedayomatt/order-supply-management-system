@@ -14,11 +14,22 @@
 
 @section('main')
     <div class="card">
-    <?php 
-        $supply_collection = $_supply::orderBy('supplied_at','desc')->take(20)->get() ?>
         <div class="card-header">
+            
+        <div class="d-flex justify-content-center">
+            <div>
+                Total Supplies
+                <h1>{{number_format($_supply::all()->sum('quantity'))}} <span style="font-size: 14px">{{$_unit}}</span></h1> 
+            </div>
+            <div class="ml-auto">
+                Total Value
+                <h1>&#8358; {{number_format($_supply::all()->sum('value'))}} <span style="font-size: 14px"></span></h1> 
+            </div>
+        </div>
+        <?php 
+        $supply_collection = $_supply::orderBy('supplied_at','desc')->take(20)->get() 
+        ?>
             <h5><i class="fa fa-arrow-up"></i> Recent Supplies</h5>
-            @include('supply.widgets.aggregate')
             <div class="content-box">
                 <div>
                     <button class="btn btn-sm btn-secondary" data-toggle="collapse" data-target="#supply-filter"><i class="fa fa-filter"></i> Filter month</button>
@@ -47,10 +58,12 @@
     <?php
     $payment_collection = $_payment::orderBy('paid_on','desc')->take(20)->get() ?>
         <div class="card-header">
-            <h5><i class="fa fa-hand-holding-usd"></i> Recent Payments</h5>
             <div class="text-right">
-                @include('payment.widgets.aggregate')
+                Aggregate Payment
+                <h1>&#8358;{{number_format($_payment::all()->sum('ammount'))}} </h1> 
             </div>
+
+            <h5><i class="fa fa-hand-holding-usd"></i> Recent Payments</h5>
             <div class="content-box">
                 <div>
                     <button class="btn btn-sm btn-secondary" data-toggle="collapse" data-target="#payment-filter"><i class="fa fa-filter"></i> Filter month</button>

@@ -14,6 +14,11 @@ class Payment extends Model
     public function user(){
         return User::withTrashed()->where('id',$this->user_id)->first();
     }
+    
+    public function created_at(){
+        return $this->created_at->toDayDateTimeString();
+}
+
 
     public function customer(){
         return Customer::withTrashed()->where('id',$this->customer_id)->first();

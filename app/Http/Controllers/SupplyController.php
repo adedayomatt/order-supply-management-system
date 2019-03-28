@@ -155,4 +155,10 @@ class SupplyController extends Controller
         return redirect()->route('order.show',[$order->id])->with('success','supply for order <strong> '.$supply->order->id().'</strong>\'s reverted');
 
     }
+    public function delete($id){
+        $supply = Supply::findorfail($id);
+        $supply->delete();
+
+        return redirect()->back()->with('success',$supply->quantity.' supplied to '.$supply->customer()->fullname().' deleted');
+    }
 }

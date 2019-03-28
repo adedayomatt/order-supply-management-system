@@ -76,6 +76,6 @@ class PaymentController extends Controller
         $payment = Payment::findorfail($id);
         $payment->delete();
 
-        return redirect()->back()->with('success',$payment->ammount.' paid by '.$payment->customer->fullname().' deleted');
+        return redirect()->back()->with('success',number_format($payment->ammount).' paid by '.$payment->customer()->fullname().' deleted');
     }
 }
