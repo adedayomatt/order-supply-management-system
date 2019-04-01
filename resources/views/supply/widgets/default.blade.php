@@ -21,7 +21,7 @@
                                 <small><i class="fa fa-user-tie"></i> <a href="{{route('user.show',[$supply->user()->id])}}"  class="{{$supply->user()->isDeleted() ? 'text-danger' : ''}}">{{$supply->user()->fullname()}}</a>. {{$supply->created_at()}}, {{$supply->created_at->diffForHumans()}} </small>
                             </div>
                             <div class="hidden-action text-right">
-                                @include('supply.widgets.delete')
+                                @include('supply.widgets.edit-delete')
                             </div>
                         </div>
                     @endforeach

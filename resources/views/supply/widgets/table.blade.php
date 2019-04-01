@@ -42,7 +42,7 @@
                                 </div>
                             @endif
                             <div class="hidden-action text-right">
-                                @include('supply.widgets.delete')
+                                @include('supply.widgets.edit-delete')
                             </div>
                         </td>
                     <!-- <td>

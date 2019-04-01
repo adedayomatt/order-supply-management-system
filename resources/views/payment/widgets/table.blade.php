@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="hidden-action text-right">
-                                @include('payment.widgets.delete')
+                                @include('payment.widgets.edit-delete')
                             </div>
                         </td>
                     </tr>

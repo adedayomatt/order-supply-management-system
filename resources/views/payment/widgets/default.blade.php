@@ -16,7 +16,7 @@
                                 <small><i class="fa fa-user-tie"></i> <a href="{{route('user.show',[$payment->user()->id])}}"  class="{{$payment->user()->isDeleted() ? 'text-danger' : ''}}">{{$payment->user()->fullname()}}</a>. {{$payment->created_at()}}, {{$payment->created_at->diffForHumans()}} </small>
                             </div>
                             <div class="hidden-action text-right">
-                                @include('payment.widgets.delete')
+                                @include('payment.widgets.edit-delete')
                             </div>
                         </div>
                         

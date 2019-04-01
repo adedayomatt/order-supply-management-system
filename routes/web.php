@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('payments','PaymentController@index')->name('payments');
     Route::get('payment/create','PaymentController@create')->name('payment.create');
+    Route::get('payment/{id}/edit','PaymentController@edit')->name('payment.edit');
+    Route::put('payment/{id}/update','PaymentController@update')->name('payment.update');
     Route::post('payment/store','PaymentController@store')->name('payment.store');
     Route::delete('payment/{id}/delete','PaymentController@delete')->name('payment.delete');
 
@@ -42,6 +44,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('supplies','SupplyController@index')->name('supplies');
     Route::get('supply/create','SupplyController@create')->name('supply.create');
     Route::post('supply/ceate','SupplyController@store')->name('supply.store');
+    Route::get('supply/{id}/edit','SupplyController@edit')->name('supply.edit');
+    Route::put('supply/{id}/update','SupplyController@update')->name('supply.update');
     Route::post('supply/{supply}/revert','SupplyController@revert')->name('supply.revert');
     Route::delete('supply/{supply}/delete','SupplyController@delete')->name('supply.delete');
     

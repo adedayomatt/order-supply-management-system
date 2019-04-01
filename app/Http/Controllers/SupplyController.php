@@ -18,11 +18,6 @@ class SupplyController extends Controller
         ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $month = Input::get('month');
@@ -56,22 +51,12 @@ class SupplyController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('supply.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
             $this->validate($request, [
@@ -96,65 +81,49 @@ class SupplyController extends Controller
         return redirect()->route('customer.show',[$customer->id])->with('success',$request->quantity.' supplied  to <strong>'.$customer->fullname().'</strong>');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    // public function show($id)
+    // {
+    //     return view('supply.show')->with('supply',Supply::findorfail($id));
+    // }
+
+    public function edit($id)
     {
-        return view('supply.show')->with('supply',Supply::findorfail($id));
+        return view('supply.edit')->with('supply',Supply::findorfail($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function edit($id)
-    // {
-    //     return view('supply.edit')->with('supply',Supply::findorfail($id));
-    // }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function update(Request $request, $id)
-    // {
-    //     $this->validate($request, [
-    //         'customer' => 'required',
-    //         'quantity' => 'required',
-    //         'ammount' => 'required',
-    //     ]);
-    //     $supply = Supply::findorfail($id);
-    //     $supply->quantity = $request->quantity;
-    //     $supply->ammount = $request->ammount;
-
-    //     return redirect()->route('supply.show',[$supply->id])->with('success','<strong>'.$supply->demand->customer->fullname().'</strong>\'s supply updated');
-    // }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function revert($id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'product_type' => ['required'],
+            'quantity' => ['required','min: 1'],
+            'quantity_value' => ['required'],
+            'date_supplied' => ['required','date'],
+        ]);
+
         $supply = Supply::findorfail($id);
-        $order = $supply->order;
 
-        $supply->reverted_at = now();
-        $supply->reverted_by = Auth::id();
+        $supply->type = $request->product_type;
+        $supply->quantity = $request->quantity;
+        $supply->value = $request->quantity_value;
+        $supply->supplied_at = $request->date_supplied;
+        $supply->note = $request->note;
         $supply->save();
-        return redirect()->route('order.show',[$order->id])->with('success','supply for order <strong> '.$supply->order->id().'</strong>\'s reverted');
 
+        return redirect()->route('customer.show',[$supply->customer()->id])->with('success','supply updated');
     }
+
+    // public function revert($id)
+    // {
+    //     $supply = Supply::findorfail($id);
+    //     $order = $supply->order;
+
+    //     $supply->reverted_at = now();
+    //     $supply->reverted_by = Auth::id();
+    //     $supply->save();
+    //     return redirect()->route('order.show',[$order->id])->with('success','supply for order <strong> '.$supply->order->id().'</strong>\'s reverted');
+
+    // }
+
     public function delete($id){
         $supply = Supply::findorfail($id);
         $supply->delete();

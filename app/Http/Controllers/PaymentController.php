@@ -72,6 +72,31 @@ class PaymentController extends Controller
         return redirect()->route('customer.show',[$customer->id])->with('success',$request->ammount.' added to <strong>'.$customer->fullname().'</strong> wallet');
     }
 
+    public function edit($id){
+        $payment = Payment::findorfail($id);
+
+        return view('payment.edit')->with('payment',$payment);
+    }
+
+    public function update(Request $request, $id){
+        $this->validate($request, [
+            'ammount' => ['required'],
+            'bank' => ['required'],
+            'date_paid' => ['required', 'date']
+        ]);
+
+        $payment = Payment::findorfail($id);
+
+        $payment->ammount = $request->ammount;
+        $payment->bank = $request->bank;
+        $payment->paid_on =  $request->date_paid;
+        $payment->note = $request->note;
+
+        $payment->save();
+
+        return redirect()->route('customer.show',[$payment->customer()->id])->with('success','Payment updated');
+    }
+
     public function delete($id){
         $payment = Payment::findorfail($id);
         $payment->delete();
