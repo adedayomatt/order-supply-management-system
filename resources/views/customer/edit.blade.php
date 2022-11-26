@@ -58,7 +58,7 @@
                     <label for="phone" class="control-label">Phone</label>
 
                     <div class="">
-                        <input id="phone" type="phone" class="form-control" name="phone" value="{{ $customer->phone }}" placeholder="customer's phone address" required autofocus>
+                        <input id="phone" type="phone" class="form-control" name="phone" value="{{ $customer->phone }}" placeholder="customer's phone address" autofocus>
                         @if ($errors->has('phone'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('phone') }}</strong>

@@ -8,13 +8,14 @@
     </div>
     <div class="card-body scrollable">
         @if($customers->count() > 0)
-            <table class="table table-striped table-bordered text-center">
+            <table class="table table-hover table-bordered text-center">
                 <thead>
                     <tr>
                         <th class="text-left">Name</th>
                         <th>Contact</th>
-                        <th>Wallet</th>
-                        <th>Supplies</th>
+                        <th>Wallet Bal</th>
+                        <th>Last supply</th>
+                        <th>Total Supplies</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,18 @@
                             </td>
                             <td class="{{$customer->wallet()->balance < 0 ? 'text-danger' : ''}}">
                             &#8358; {{number_format($customer->wallet()->balance)}}
+                            </td>
+                            <td>
+                                @if($customer->lastSupply() !== null)
+                                        <div>
+                                        {{number_format($customer->lastSupply()->quantity)}} {{$_unit}} (&#8358;{{number_format($customer->lastSupply()->value)}})
+                                        </div>
+                                        <small> {{$customer->lastSupply()->supplied_at->format('d M, Y')}}. {{$customer->lastSupply()->created_at->diffForHumans()}}</small>
+                                   @else
+                                   <div class="text-center grey">
+                                        <small><i class="fa fa-exclamation-triangle text-danger"></i> Never supplied</small>
+                                   </div>
+                                   @endif
                             </td>
                             <td>
                                 {{number_format($customer->totalSupplies()['quantity'])}} {{$_unit}}

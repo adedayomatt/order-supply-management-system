@@ -28,9 +28,7 @@ class Supply extends Model
 
     }
     public function created_at(){
-        $date = new DateTime($this->created_at);
-        return date_format($date,'d M, Y H:i');
-
+        return $this->created_at->toDayDateTimeString();
 }
 
     public function reverted(){

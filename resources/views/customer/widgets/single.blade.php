@@ -6,7 +6,7 @@
             <div>
             {{number_format($customer->lastSupply()->quantity)}} {{$_unit}} (&#8358;{{number_format($customer->lastSupply()->value)}})
             </div>
-            <small> {{$customer->lastSupply()->created_at->diffForHumans()}}</small>
+            <small> {{$customer->lastSupply()->supplied_at->format('d M, Y')}}. {{$customer->lastSupply()->created_at->diffForHumans()}}</small>
         @else
         <div class="text-center grey">
             <small><i class="fa fa-exclamation-triangle text-danger"></i> Never supplied</small>

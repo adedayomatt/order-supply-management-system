@@ -2,11 +2,12 @@
     $collection = isset($supply_collection) ? $supply_collection: $_supply::orderby('supplied_at','desc')->get();
 ?>
 @if($collection->count() > 0)
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Customer</th>
                 <th>Quantity</th>
+                <th>Value</th>
                 <th>Supplied on</th>
                 <th></th>
                 <!-- <th></th> -->
@@ -15,7 +16,7 @@
         </thead>
         <tbody>
             @foreach($collection as $supply)
-                <tr>
+                <tr class="has-hidden-action">
                     <td >
                         <i class="fa fa-user"></i> <strong><a href="{{route('customer.show',[$supply->customer()->id])}}" class="{{$supply->customer()->isDeleted() ? 'text-danger' : ''}}">{{$supply->customer()->fullname()}}</a></strong>
                         <div>
@@ -26,6 +27,7 @@
                         </div>
                     </td>
                     <td>{{number_format($supply->quantity)}}</td>
+                    <td>&#8358; {{number_format($supply->value)}}</td>
                     <td>{{$supply->supplied_at()}}</td>
                     <td>   
                         <small><i class="fa fa-pen"></i> Recorded by <a href="{{route('user.show',[$supply->user()->id])}}"  class="{{$supply->user()->isDeleted() ? 'text-danger' : ''}}">{{$supply->user()->fullname()}}</a> on {{$supply->created_at()}}, {{$supply->created_at->diffForHumans()}} </small>
@@ -39,7 +41,10 @@
                                     {!!$supply->note!!}
                                 </div>
                             @endif
-                    </td>
+                            <div class="hidden-action text-right">
+                                @include('supply.widgets.edit-delete')
+                            </div>
+                        </td>
                     <!-- <td>
                         @if($supply->reverted())
                         <div>

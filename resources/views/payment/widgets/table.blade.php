@@ -2,11 +2,11 @@
     $collection = isset($payment_collection) ? $payment_collection: $_payment::orderby('paid_on','desc')->get();
 ?>
 @if($collection->count() > 0)
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Customer</th>
-                <th>Ammount(&#8358;)</th>
+                <th>Ammount</th>
                 <th>Bank</th>
                 <th>Date Paid</th>
                 <th></th>
@@ -14,7 +14,7 @@
         </thead>
         <tbody>
                 @foreach($collection as $payment)
-                    <tr>
+                    <tr class="has-hidden-action">
                         <td >
                             <i class="fa fa-user"></i> <strong><a href="{{route('customer.show',[$payment->customer()->id])}}" class="{{$payment->customer()->isDeleted() ? 'text-danger' : ''}}">{{$payment->customer()->fullname()}}</a></strong>
                             @if($payment->customer()->email != null)
@@ -28,7 +28,7 @@
                                 </div>
                             @endif
                         </td>
-                        <td>{{number_format($payment->ammount)}}</td>
+                        <td>&#8358; {{number_format($payment->ammount)}}</td>
                         <td>{{$payment->bank}}</td>
                         <td>{{$payment->paid_on()}}</td>
                         <td >
@@ -43,6 +43,9 @@
                                     {!!$payment->note!!}
                                 </div>
                             @endif
+                            <div class="hidden-action text-right">
+                                @include('payment.widgets.edit-delete')
+                            </div>
                         </td>
                     </tr>
                 @endforeach
