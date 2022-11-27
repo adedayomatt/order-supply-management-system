@@ -6,7 +6,11 @@
   </button>
 
   <a class="navbar-brand" href="{{url('/')}}">
-    <img src="{{ asset('storage/images/global50-50-logo.png') }}" height="40px" />
+    @if(config('app.logo_url'))
+        <img src="{{ config('app.logo_url') }}" height="40px" />
+    @else
+        {{ config('app.name') }}
+    @endif
   </a>
 
   <form action="{{route('customer.index')}}" class="form-inline">

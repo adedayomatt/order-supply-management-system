@@ -69,7 +69,6 @@
             <div class="col-md-6">
                 <div style="padding-top: 3%">
                     <div class="p-5 text-center bg-white" >
-                        <h1 style="font-size: 60px">Global 50-50</h1>
                             <h4>How is going today <strong>{{auth()->user()->fullname()}} ???</strong></h4>
                             <div>
                                 <iframe src="https://free.timeanddate.com/clock/i6m40vau/n1972/szw210/szh210/hocfff/hbw0/cf100/hgr0/fas28/facfff/fdi90/mqc000/mqs2/mql3/mqw4/mqd70/mhc000/mhs2/mhl3/mhw4/mhd70/mmv0/hwm2/hhs3/hms3/hsc00f" frameborder="0" width="210" height="210"></iframe>
