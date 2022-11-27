@@ -9,7 +9,11 @@
     </head>
     <body>
         <div id="app">
-            <a class="navbar-brand" href="{{url('/')}}" style="color: #fff">{{config('app.name')}}</a>
+            <div class="text-cente">
+            <a href="{{url('/')}}" >
+                <img src="{{ asset('storage/images/global50-50-logo.png') }}" height="80px" />
+            </a>
+            </div>
             <main>
                 <div id="app-accordion">
                     <div class="container-fluid">
