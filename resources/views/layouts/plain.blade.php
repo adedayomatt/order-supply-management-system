@@ -9,13 +9,13 @@
     </head>
     <body>
         <div id="app">
-            <div class="text-center mt-5 mb-3">
-                <a href="{{url('/')}}" >
-                    <img src="{{ asset('storage/images/global50-50-logo.png') }}" height="80px" />
-                </a>
-            </div>
             <main>
                 <div id="app-accordion">
+                    <div class="text-center">
+                        <a href="{{url('/')}}" >
+                            <img src="{{ asset('storage/images/global50-50-logo.png') }}" height="80px" />
+                        </a>
+                    </div>
                     <div class="container-fluid">
                         <div class="app">
                             <div class="content">
