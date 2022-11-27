@@ -11,7 +11,7 @@
         <div id="app">
             <main>
                 <div id="app-accordion">
-                    <div class="text-center">
+                    <div class="text-center mb-2">
                         <a href="{{url('/')}}" >
                             <img src="{{ asset('storage/images/global50-50-logo.png') }}" height="80px" />
                         </a>

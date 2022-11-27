@@ -41,7 +41,7 @@
 /* sm screen and above*/
     @media (min-width: 576px){
         main{
-            padding-top: 80px
+            padding-top: 20px
         }
     }
 </style>
