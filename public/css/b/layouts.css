@@ -29,7 +29,7 @@ div::-webkit-scrollbar-thumb
 
 
 main{
-	margin-top: 60px;
+	padding-top: 120px
 }
 .lhs-fixed,.rhs-fixed{
 	z-index: 1;
@@ -184,6 +184,10 @@ main{
     .card.widget .card-body:hover{
         overflow-y: auto;
     }
+
+	main{
+		padding-top: 80px
+	}	
 
 }
 
