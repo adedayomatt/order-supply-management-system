@@ -5,8 +5,8 @@
 <!-- Extra CSS -->
 <style>
     body{
-        /* background-color: #DCEBF9; */
-        background-image: url({{asset('storage/images/bg/sand-truck.jpeg')}});
+        background-color: #f7f7f7;
+        /* background-image: url({{asset('storage/images/bg/sand-truck.jpeg')}}); */
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

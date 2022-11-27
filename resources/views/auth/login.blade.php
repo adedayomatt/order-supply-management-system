@@ -3,14 +3,9 @@
 @section('main')
     @if(Auth::guest())
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-sm-6 col-md-8">
-                <!-- <div class="text-center shadow-md p-5" style="background-color: rgba(0,0,0,.4)">
-                    <h1 style="color: #fff;">GLOBAL 50 - 50</h1>
-                </div> -->
-            </div>
+        <div class="row align-items-center justify-content-center">
             <div class="col-sm-6  col-md-4">
-                <div class="content-box mt-5 py-5" style="background-color: rgba(255,255,255,.5)">
+                <div class="content-box mt-5 py-5">
                     <h5 class="text-center mb-3">{{ __('Login') }}</h5>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -73,7 +68,7 @@
     <div class="row justify-content-center">
             <div class="col-md-6">
                 <div style="padding-top: 3%">
-                    <div class="p-5 text-center"style="background-color: rgba(0,0,0,.5); color: #fff;" >
+                    <div class="p-5 text-center bg-white" >
                         <h1 style="font-size: 60px">Global 50-50</h1>
                             <h4>How is going today <strong>{{auth()->user()->fullname()}} ???</strong></h4>
                             <div>
