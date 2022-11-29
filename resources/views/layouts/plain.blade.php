@@ -13,8 +13,14 @@
                 <div id="app-accordion">
                     <div class="text-center mb-2">
                         <a href="{{url('/')}}" >
-                            <img src="{{ asset('storage/images/global50-50-logo.png') }}" height="80px" />
+                            @if(config('app.logo_url'))
+                                <img src="{{ config('app.logo_url') }}" height="80px" />
+                            @else
+                                <h1>{{ config('app.name') }}</h1>
+                            @endif
                         </a>
+
+                        
                     </div>
                     <div class="container-fluid">
                         <div class="app">
